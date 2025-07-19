@@ -1,70 +1,102 @@
 @import "tailwindcss";
 
 :root {
-            --primary-color: #6eac9f;
-            --primary-light: #e6f2ef; /* A lighter shade for backgrounds */
-            --primary-dark: #5a9c8f; /* A darker shade for hover effects */
-            --primary-shadow-rgb: 110, 172, 159;
-        }
+    --primary-color: #6eac9f;
+    --primary-light: #e6f2ef;
+    /* A lighter shade for backgrounds */
+    --primary-dark: #5a9c8f;
+    /* A darker shade for hover effects */
+    --primary-shadow-rgb: 110, 172, 159;
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6; /* Light gray background */
-            color: #374151; /* Dark gray text */
-        }
-        .container {
-            max-width: 1000px;
-        }
-        .profile-card {
-            border: 2px solid transparent; /* Default border */
-            transition: all 0.3s ease-in-out;
-            margin-bottom: 1rem; /* Add margin bottom for spacing */
-        }
-        .profile-card.highlight {
-            border-color: var(--primary-color); /* Primary color border for highlighted card */
-            box-shadow: 0 10px 15px -3px rgba(var(--primary-shadow-rgb), 0.3), 0 4px 6px -2px rgba(var(--primary-shadow-rgb), 0.15); /* Primary color shadow */
-            background-color: var(--primary-light); /* Light primary background for highlighted card */
-            transform: translateY(-5px); /* Slight lift effect */
-        }
-        .radio-option {
-            display: block;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            border: 1px solid #d1d5db; /* Light gray border */
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            background-color: #ffffff;
-        }
-        .radio-option:hover {
-            border-color: var(--primary-color); /* Primary color on hover */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        .radio-option input[type="radio"] {
-            margin-right: 0.75rem;
-            accent-color: var(--primary-color); /* Primary color accent for radio button */
-        }
-        .radio-option.selected {
-            background-color: var(--primary-light); /* Lighter primary when selected */
-            border-color: var(--primary-color); /* Primary color border when selected */
-            box-shadow: 0 4px 6px -1px rgba(var(--primary-shadow-rgb), 0.1), 0 2px 4px -1px rgba(var(--primary-shadow-rgb), 0.06);
-        }
-        /* Styles for the results layout */
-        .results-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* Default to single column for mobile */
-            gap: 1.5rem;
-        }
-        .results-grid .highlighted-card {
-            grid-column: 1 / -1; /* Full width */
-        }
-        .results-grid .other-cards {
-            display: grid;
-            grid-template-columns: 1fr; /* Default to single column for mobile */
-            gap: 1.5rem;
-        }
-        @media (min-width: 768px) { /* Medium screens and up */
-            .results-grid .other-cards {
-                grid-template-columns: repeat(3, 1fr); /* Three columns for other cards */
-            }
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f3f4f6;
+    /* Light gray background */
+    color: #374151;
+    /* Dark gray text */
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.profile-card {
+    border: 2px solid transparent;
+    /* Default border */
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 1rem;
+    /* Add margin bottom for spacing */
+}
+
+.profile-card.highlight {
+    border-color: var(--primary-color);
+    /* Primary color border for highlighted card */
+    box-shadow: 0 10px 15px -3px rgba(var(--primary-shadow-rgb), 0.3), 0 4px 6px -2px rgba(var(--primary-shadow-rgb), 0.15);
+    /* Primary color shadow */
+    background-color: var(--primary-light);
+    /* Light primary background for highlighted card */
+    transform: translateY(-5px);
+    /* Slight lift effect */
+}
+
+.radio-option {
+    display: block;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid #d1d5db;
+    /* Light gray border */
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: #ffffff;
+}
+
+.radio-option:hover {
+    border-color: var(--primary-color);
+    /* Primary color on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.radio-option input[type="radio"] {
+    margin-right: 0.75rem;
+    accent-color: var(--primary-color);
+    /* Primary color accent for radio button */
+}
+
+.radio-option.selected {
+    background-color: var(--primary-light);
+    /* Lighter primary when selected */
+    border-color: var(--primary-color);
+    /* Primary color border when selected */
+    box-shadow: 0 4px 6px -1px rgba(var(--primary-shadow-rgb), 0.1), 0 2px 4px -1px rgba(var(--primary-shadow-rgb), 0.06);
+}
+
+/* Styles for the results layout */
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Default to single column for mobile */
+    gap: 1.5rem;
+}
+
+.results-grid .highlighted-card {
+    grid-column: 1 / -1;
+    /* Full width */
+}
+
+.results-grid .other-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Default to single column for mobile */
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+
+    /* Medium screens and up */
+    .results-grid .other-cards {
+        grid-template-columns: repeat(3, 1fr);
+        /* Three columns for other cards */
+    }
+}
