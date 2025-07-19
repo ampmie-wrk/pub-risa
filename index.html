@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock RISA Assessment & Profiles by BudgetBrews</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="/src/index.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6eac9f;
+            --primary-light: #e6f2ef; /* A lighter shade for backgrounds */
+            --primary-dark: #5a9c8f; /* A darker shade for hover effects */
+            --primary-shadow-rgb: 110, 172, 159;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+            color: #374151; /* Dark gray text */
+        }
+        .container {
+            max-width: 1000px;
+        }
+        .profile-card {
+            border: 2px solid transparent; /* Default border */
+            transition: all 0.3s ease-in-out;
+            margin-bottom: 1rem; /* Add margin bottom for spacing */
+        }
+        .profile-card.highlight {
+            border-color: var(--primary-color); /* Primary color border for highlighted card */
+            box-shadow: 0 10px 15px -3px rgba(var(--primary-shadow-rgb), 0.3), 0 4px 6px -2px rgba(var(--primary-shadow-rgb), 0.15); /* Primary color shadow */
+            background-color: var(--primary-light); /* Light primary background for highlighted card */
+            transform: translateY(-5px); /* Slight lift effect */
+        }
+        .radio-option {
+            display: block;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border: 1px solid #d1d5db; /* Light gray border */
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            background-color: #ffffff;
+        }
+        .radio-option:hover {
+            border-color: var(--primary-color); /* Primary color on hover */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .radio-option input[type="radio"] {
+            margin-right: 0.75rem;
+            accent-color: var(--primary-color); /* Primary color accent for radio button */
+        }
+        .radio-option.selected {
+            background-color: var(--primary-light); /* Lighter primary when selected */
+            border-color: var(--primary-color); /* Primary color border when selected */
+            box-shadow: 0 4px 6px -1px rgba(var(--primary-shadow-rgb), 0.1), 0 2px 4px -1px rgba(var(--primary-shadow-rgb), 0.06);
+        }
+        /* Styles for the results layout */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to single column for mobile */
+            gap: 1.5rem;
+        }
+        .results-grid .highlighted-card {
+            grid-column: 1 / -1; /* Full width */
+        }
+        .results-grid .other-cards {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to single column for mobile */
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) { /* Medium screens and up */
+            .results-grid .other-cards {
+                grid-template-columns: repeat(3, 1fr); /* Three columns for other cards */
+            }
+        }
+    </style>
+</head>
+<body class="p-4">
+
+    <div class="container mx-auto bg-white rounded-xl shadow-lg p-8 my-8">
+        <div class="flex justify-end mb-4">
+            <button id="lang-toggle-button" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg text-sm transition duration-300 ease-in-out">
+                🇬🇧 / 🇹🇭
+            </button>
+        </div>
+
+        <h1 class="text-4xl font-extrabold text-center text-[--primary-color] mb-8" data-lang-key="mainTitle">Discover Your Retirement Income Style</h1>
+        <p class="text-lg text-center text-gray-600 mb-10" data-lang-key="subTitle">Take this mock RISA assessment to understand your preferences for retirement income. There are no right or wrong answers – just your unique style!</p>
+
+        <!-- Powered by BudgetBrews -->
+        <div class="text-center mb-10">
+            <a href="https://www.facebook.com/budgetbrews" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 text-gray-600 hover:text-[--primary-color] transition duration-300">
+                <img src="http://googleusercontent.com/file_content/2" alt="BudgetBrews Logo" class="w-12 h-12 rounded-full shadow-sm">
+                <span class="text-lg font-semibold" data-lang-key="poweredBy">Powered by BudgetBrews</span>
+            </a>
+        </div>
+
+        <!-- Assessment Section -->
+        <div id="assessment-section" class="mb-12">
+            <form id="risa-form" class="space-y-6">
+                <!-- Question 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <p class="text-xl font-semibold mb-4 text-gray-800" data-lang-key="q1">1. How do you prefer your essential retirement expenses to be covered?</p>
+                    <label class="radio-option">
+                        <input type="radio" name="q1" value="1" class="form-radio">
+                        <span class="font-medium" data-lang-key="q1_a">A. Primarily through guaranteed, predictable income sources like annuities or pensions.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q1" value="2" class="form-radio">
+                        <span class="font-medium" data-lang-key="q1_b">B. By setting aside specific, safe funds for short-term needs, while investing for long-term growth.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q1" value="3" class="form-radio">
+                        <span class="font-medium" data-lang-key="q1_c">C. Through a diversified investment portfolio, with strategies to limit significant losses.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q1" value="4" class="form-radio">
+                        <span class="font-medium" data-lang-key="q1_d">D. From a flexible investment portfolio, accepting market fluctuations for higher growth potential.</span>
+                    </label>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <p class="text-xl font-semibold mb-4 text-gray-800" data-lang-key="q2">2. How important is it for you to have flexibility to change your retirement income plan?</p>
+                    <label class="radio-option">
+                        <input type="radio" name="q2" value="1" class="form-radio">
+                        <span class="font-medium" data-lang-key="q2_a">A. Not very important; I prefer a set-it-and-forget-it plan that I can commit to.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q2" value="2" class="form-radio">
+                        <span class="font-medium" data-lang-key="q2_b">B. Very important; I want the ability to adjust my strategy as life or markets evolve.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q2" value="3" class="form-radio">
+                        <span class="font-medium" data-lang-key="q2_c">C. Moderately important; I value a structured plan but want some flexibility for significant changes.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q2" value="4" class="form-radio">
+                        <span class="font-medium" data-lang-key="q2_d">D. Extremely important; maximum adaptability is key for my comfort.</span>
+                    </label>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <p class="text-xl font-semibold mb-4 text-gray-800" data-lang-key="q3">3. What's your comfort level with market volatility impacting your retirement income?</p>
+                    <label class="radio-option">
+                        <input type="radio" name="q3" value="1" class="form-radio">
+                        <span class="font-medium" data-lang-key="q3_a">A. I want minimal exposure to market swings; stability is my priority.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q3" value="2" class="form-radio">
+                        <span class="font-medium" data-lang-key="q3_b">B. I'm okay with some market exposure, especially for long-term growth, but want short-term income protected.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q3" value="3" class="form-radio">
+                        <span class="font-medium" data-lang-key="q3_c">C. I'm comfortable with market exposure, provided there are mechanisms to limit large losses.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q3" value="4" class="form-radio">
+                        <span class="font-medium" data-lang-key="q3_d">D. I embrace market exposure for the potential of higher returns, even if it means more income variability.</span>
+                    </label>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <p class="text-xl font-semibold mb-4 text-gray-800" data-lang-key="q4">4. How do you feel about using insurance products (like annuities) for retirement income?</p>
+                    <label class="radio-option">
+                        <input type="radio" name="q4" value="1" class="form-radio">
+                        <span class="font-medium" data-lang-key="q4_a">A. I see them as a valuable tool for ensuring a guaranteed income for life.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q4" value="2" class="form-radio">
+                        <span class="font-medium" data-lang-key="q4_b">B. I might consider them for a portion of my income, but prefer to keep most assets flexible.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q4" value="3" class="form-radio">
+                        <span class="font-medium" data-lang-key="q4_c">C. I'd consider them if they offer some market participation while providing a level of protection.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q4" value="4" class="form-radio">
+                        <span class="font-medium" data-lang-key="q4_d">D. I generally prefer to manage my investments directly and avoid insurance products.</span>
+                    </label>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <p class="text-xl font-semibold mb-4 text-gray-800" data-lang-key="q5">5. When planning for unexpected expenses in retirement, what's your preference?</p>
+                    <label class="radio-option">
+                        <input type="radio" name="q5" value="1" class="form-radio">
+                        <span class="font-medium" data-lang-key="q5_a">A. Rely on a robust, guaranteed income stream that covers all my needs, including emergencies.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q5" value="2" class="form-radio">
+                        <span class="font-medium" data-lang-key="q5_b">B. Keep a significant portion of liquid assets readily available, separate from long-term investments.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q5" value="3" class="form-radio">
+                        <span class="font-medium" data-lang-key="q5_c">C. Have a well-diversified portfolio that can be accessed, with strategies to minimize selling during downturns.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q5" value="4" class="form-radio">
+                        <span class="font-medium" data-lang-key="q5_d">D. Maintain a highly liquid portfolio that can be easily adjusted to cover unforeseen costs.</span>
+                    </label>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                    <p class="text-xl font-semibold mb-4 text-gray-800" data-lang-key="q6">6. What is your primary goal for the overall value of your retirement assets throughout retirement?</p>
+                    <label class="radio-option">
+                        <input type="radio" name="q6" value="1" class="form-radio">
+                        <span class="font-medium" data-lang-key="q6_a">A. To ensure a stable, predictable income stream, even if the overall asset value declines over time.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q6" value="2" class="form-radio">
+                        <span class="font-medium" data-lang-key="q6_b">B. To preserve capital for immediate and near-term needs, while allowing long-term assets to grow.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q6" value="3" class="form-radio">
+                        <span class="font-medium" data-lang-key="q6_c">C. To grow the portfolio over time, but with a focus on managing downside risk.</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="q6" value="4" class="form-radio">
+                        <span class="font-medium" data-lang-key="q6_d">D. To maximize the overall growth of my assets, even if it means more fluctuations in value.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full bg-[--primary-color] hover:bg-[--primary-dark] text-white font-bold py-3 px-6 rounded-lg text-xl transition duration-300 ease-in-out shadow-md hover:shadow-lg" data-lang-key="revealButton">
+                    Reveal My RISA Profile
+                </button>
+                <button type="button" id="reset-button" class="w-full bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 px-6 rounded-lg text-xl transition duration-300 ease-in-out shadow-md hover:shadow-lg mt-4" data-lang-key="resetButton">
+                    Reset Assessment
+                </button>
+            </form>
+        </div>
+
+        <!-- Results Section (Initially hidden) -->
+        <div id="results-section" class="hidden mt-12 pt-8 border-t-2 border-gray-200">
+            <h2 class="text-3xl font-bold text-center text-[--primary-color] mb-6"><span data-lang-key="yourProfilePrefix">Your RISA Profile:</span> <span id="your-profile-name" class="text-[--primary-color]"></span></h2>
+            <p class="text-lg text-center text-gray-700 mb-4"><span data-lang-key="yourTotalScorePrefix">Your total score:</span> <span id="total-score" class="font-bold text-[--primary-color]"></span> <span data-lang-key="pointsSuffix">points.</span></p>
+            <p class="text-lg text-center text-gray-700 mb-10" id="your-profile-description"></p>
+
+            <h3 class="text-2xl font-bold text-center text-gray-800 mb-8" data-lang-key="exploreProfiles">Explore All RISA Profiles</h3>
+
+            <div class="results-grid">
+                <!-- Placeholder for highlighted card -->
+                <div id="highlighted-profile-card" class="highlighted-card"></div>
+
+                <div class="other-cards">
+                    <!-- Total Return Profile Card -->
+                    <div id="total-return-card" class="profile-card bg-white rounded-xl shadow-lg p-6">
+                        <h4 class="text-2xl font-bold text-green-700 mb-3" data-lang-key="totalReturnTitle">📈 Total Return <span class="text-gray-500 text-lg">(21-24 pts)</span></h4>
+                        <p class="text-gray-600 mb-4" data-lang-key="totalReturnDesc">You prefer income based on market growth and value flexibility to adapt to changes.</p>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="strategiesTitle">Strategies:</h5>
+                        <ul class="list-disc list-inside text-gray-700 mb-4">
+                            <li data-lang-key="totalReturnStrat1">Systematic withdrawals from a diversified portfolio.</li>
+                            <li data-lang-key="totalReturnStrat2">Flexible spending rules (e.g., "Guardrails" approach).</li>
+                            <li data-lang-key="totalReturnStrat3">Emphasis on maximizing long-term portfolio value.</li>
+                        </ul>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="productsTitle">Financial Products:</h5>
+                        <ul class="list-disc list-inside text-gray-700 mb-4">
+                            <li data-lang-key="totalReturnProd1">Diversified mutual funds/ETFs (equities, bonds).</li>
+                            <li data-lang-key="totalReturnProd2">Individual stocks and bonds.</li>
+                            <li data-lang-key="totalReturnProd3">Low-cost brokerage accounts.</li>
+                        </ul>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="allocationTitle">Sample Asset Allocation:</h5>
+                        <p class="text-gray-700" data-lang-key="totalReturnAlloc">Higher allocation to equities (e.g., 60-80% equities, 20-40% fixed income), reflecting comfort with market volatility for growth potential.</p>
+                    </div>
+
+                    <!-- Protected Income Profile Card -->
+                    <div id="protected-income-card" class="profile-card bg-white rounded-xl shadow-lg p-6">
+                        <h4 class="text-2xl font-bold text-purple-700 mb-3" data-lang-key="protectedIncomeTitle">🔒 Protected Income <span class="text-gray-500 text-lg">(6-10 pts)</span></h4>
+                        <p class="text-gray-600 mb-4" data-lang-key="protectedIncomeDesc">You prioritize guaranteed income streams and prefer a committed, stable financial plan.</p>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="strategiesTitle">Strategies:</h5>
+                        <ul class="list-disc list-inside text-gray-700 mb-4">
+                            <li data-lang-key="protectedIncomeStrat1">Building a "floor" of guaranteed income to cover essential expenses.</li>
+                            <li data-lang-key="protectedIncomeStrat2">Using remaining assets for discretionary spending or growth.</li>
+                            <li data-lang-key="protectedIncomeStrat3">Focus on predictability and security.</li>
+                        </ul>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="productsTitle">Financial Products:</h5>
+                        <ul class="list-disc list-inside text-gray-700 mb-4">
+                            <li data-lang-key="protectedIncomeProd1">Immediate or Deferred Income Annuities.</li>
+                            <li data-lang-key="protectedIncomeProd2">Social Security benefits.</li>
+                            <li data-lang-key="protectedIncomeProd3">Pensions.</li>
+                            <li data-lang-key="protectedIncomeProd4">High-quality government bonds.</li>
+                        </ul>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="allocationTitle">Sample Asset Allocation:</h5>
+                        <p class="text-gray-700" data-lang-key="protectedIncomeAlloc">Significant portion of assets allocated to income-generating annuities or fixed-income products. Remaining portfolio can be more growth-oriented (e.g., 30-50% equities, 50-70% fixed income/annuities).</p>
+                    </div>
+
+                    <!-- Risk Wrap Profile Card -->
+                    <div id="risk-wrap-card" class="profile-card bg-white rounded-xl shadow-lg p-6">
+                        <h4 class="text-2xl font-bold text-red-700 mb-3" data-lang-key="riskWrapTitle">🛡️ Risk Wrap <span class="text-gray-500 text-lg">(16-20 pts)</span></h4>
+                        <p class="text-gray-600 mb-4" data-lang-key="riskWrapDesc">You seek market growth but desire a structured plan with built-in protections against major downturns.</p>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="strategiesTitle">Strategies:</h5>
+                        <ul class="list-disc list-inside text-gray-700 mb-4">
+                            <li data-lang-key="riskWrapStrat1">Investing for growth while using strategies to mitigate downside risk.</li>
+                            <li data-lang-key="riskWrapStrat2">Implementing guardrails or systematic rebalancing.</li>
+                            <li data-lang-key="riskWrapStrat3">Focus on long-term growth with a safety net.</li>
+                        </ul>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="productsTitle">Financial Products:</h5>
+                        <ul class="list-disc list-inside text-gray-700 mb-4">
+                            <li data-lang-key="riskWrapProd1">Diversified portfolios with tactical asset allocation.</li>
+                            <li data-lang-key="riskWrapProd2">Variable annuities with guaranteed minimum withdrawal benefits (GMWBs).</li>
+                            <li data-lang-key="riskWrapProd3">Structured products.</li>
+                            <li data-lang-key="riskWrapProd4">Hedging strategies (e.g., put options, inverse ETFs - for advanced investors).</li>
+                        </ul>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="allocationTitle">Sample Asset Allocation:</h5>
+                        <p class="text-gray-700" data-lang-key="riskWrapAlloc">A balanced approach with a strong equity component, but with specific products or strategies to limit severe losses (e.g., 50-70% equities, 30-50% fixed income, potentially with a portion in GMWB annuities).</p>
+                    </div>
+
+                    <!-- Time Segmentation Profile Card -->
+                    <div id="time-segmentation-card" class="profile-card bg-white rounded-xl shadow-lg p-6">
+                        <h4 class="text-2xl font-bold text-blue-700 mb-3" data-lang-key="timeSegmentationTitle">⏳ Time Segmentation <span class="text-gray-500 text-lg">(11-15 pts)</span></h4>
+                        <p class="text-gray-600 mb-4" data-lang-key="timeSegmentationDesc">You prefer a mix of guaranteed income for short-term needs and market-based growth for long-term goals, valuing flexibility.</p>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="strategiesTitle">Strategies:</h5>
+                        <ul class="list-disc list-inside text-gray-700 mb-4">
+                            <li data-lang-key="timeSegmentationStrat1">"Bucketing" strategy: allocating funds to different time horizons.</li>
+                            <li data-lang-key="timeSegmentationStrat2">Short-term bucket for immediate needs (safe assets).</li>
+                            <li data-lang-key="timeSegmentationStrat3">Long-term bucket for future needs (growth assets).</li>
+                            <li data-lang-key="timeSegmentationStrat4">Flexibility to adjust buckets based on market performance.</li>
+                        </ul>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="productsTitle">Financial Products:</h5>
+                        <ul class="list-disc list-inside text-gray-700 mb-4">
+                            <li data-lang-key="timeSegmentationProd1">Cash, money market accounts, CDs (short-term bucket).</li>
+                            <li data-lang-key="timeSegmentationProd2">Short-term bonds (intermediate bucket).</li>
+                            <li data-lang-key="timeSegmentationProd3">Diversified equities and long-term bonds (long-term bucket).</li>
+                        </ul>
+                        <h5 class="text-lg font-semibold text-gray-800 mb-2" data-lang-key="allocationTitle">Sample Asset Allocation:</h5>
+                        <p class="text-gray-700" data-lang-key="timeSegmentationAlloc">Varies by bucket: near-term buckets are very conservative (e.g., 0-10% equities), while longer-term buckets are more aggressive (e.g., 70-90% equities). Overall, it's a blend of fixed income and growth assets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="mt-12 p-6 bg-yellow-50 rounded-lg border border-yellow-200 text-yellow-800 text-center text-sm" data-lang-key="disclaimerSection">
+                <p class="font-semibold mb-2" data-lang-key="disclaimerTitle">Disclaimer:</p>
+                <p data-lang-key="disclaimerText">This assessment is a mock RISA profile evaluation and should not be used as a real financial reference. It is designed for illustrative purposes only. For a comprehensive and personalized retirement income style assessment, please consider taking the full assessment on the official RISA website or consulting with a qualified financial advisor.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Box for Alerts -->
+    <div id="message-box" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl text-center max-w-sm mx-auto">
+            <p id="message-text" class="text-lg font-semibold text-gray-800 mb-6"></p>
+            <button id="message-close-button" class="bg-[--primary-color] hover:bg-[--primary-dark] text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('risa-form');
+            const assessmentSection = document.getElementById('assessment-section');
+            const resultsSection = document.getElementById('results-section');
+            const yourProfileName = document.getElementById('your-profile-name');
+            const yourProfileDescription = document.getElementById('your-profile-description');
+            const totalScoreDisplay = document.getElementById('total-score');
+            const highlightedProfileCard = document.getElementById('highlighted-profile-card');
+            const resetButton = document.getElementById('reset-button');
+            const langToggleButton = document.getElementById('lang-toggle-button');
+
+            // Message box elements
+            const messageBox = document.getElementById('message-box');
+            const messageText = document.getElementById('message-text');
+            const messageCloseButton = document.getElementById('message-close-button');
+
+            const allProfileCards = {
+                'total-return': document.getElementById('total-return-card'),
+                'protected-income': document.getElementById('protected-income-card'),
+                'risk-wrap': document.getElementById('risk-wrap-card'),
+                'time-segmentation': document.getElementById('time-segmentation-card')
+            };
+
+            let currentLang = 'en'; // Default language
+
+            const translations = {
+                // Main Titles
+                mainTitle: { en: "Discover Your Retirement Income Style", th: "ค้นพบสไตล์การรับรายได้วัยเกษียณของคุณ" },
+                subTitle: { en: "Take this mock RISA assessment to understand your preferences for retirement income. There are no right or wrong answers – just your unique style!", th: "ทำแบบประเมิน RISA จำลองนี้เพื่อทำความเข้าใจความต้องการของคุณเกี่ยวกับรายได้วัยเกษียณ ไม่มีคำตอบที่ถูกหรือผิด – มีเพียงสไตล์ที่เป็นเอกลักษณ์ของคุณเท่านั้น!" },
+                poweredBy: { en: "Powered by BudgetBrews", th: "ขับเคลื่อนโดย BudgetBrews" },
+                revealButton: { en: "Reveal My RISA Profile", th: "เปิดเผยโปรไฟล์ RISA ของฉัน" },
+                resetButton: { en: "Reset Assessment", th: "รีเซ็ตแบบประเมิน" },
+                yourProfilePrefix: { en: "Your RISA Profile:", th: "โปรไฟล์ RISA ของคุณ:" },
+                yourTotalScorePrefix: { en: "Your total score:", th: "คะแนนรวมของคุณ:" },
+                pointsSuffix: { en: "points.", th: "คะแนน." },
+                exploreProfiles: { en: "Explore All RISA Profiles", th: "สำรวจโปรไฟล์ RISA ทั้งหมด" },
+                strategiesTitle: { en: "Strategies:", th: "กลยุทธ์:" },
+                productsTitle: { en: "Financial Products:", th: "ผลิตภัณฑ์ทางการเงิน:" },
+                allocationTitle: { en: "Sample Asset Allocation:", th: "ตัวอย่างการจัดสรรสินทรัพย์:" },
+
+                // Disclaimer
+                disclaimerSection: { en: `
+                    <p class="font-semibold mb-2" data-lang-key="disclaimerTitle">Disclaimer:</p>
+                    <p data-lang-key="disclaimerText">This assessment is a mock RISA profile evaluation and should not be used as a real financial reference. It is designed for illustrative purposes only. For a comprehensive and personalized retirement income style assessment, please consider taking the full assessment on the official RISA website or consulting with a qualified financial advisor.</p>
+                `, th: `
+                    <p class="font-semibold mb-2" data-lang-key="disclaimerTitle">ข้อจำกัดความรับผิดชอบ:</p>
+                    <p data-lang-key="disclaimerText">การประเมินนี้เป็นการประเมินโปรไฟล์ RISA จำลอง และไม่ควรถือเป็นข้อมูลอ้างอิงทางการเงินจริง การประเมินนี้มีวัตถุประสงค์เพื่อเป็นตัวอย่างเท่านั้น สำหรับการประเมินสไตล์รายได้วัยเกษียณที่ครอบคลุมและเป็นส่วนตัว โปรดพิจารณาทำแบบประเมินฉบับเต็มบนเว็บไซต์ RISA อย่างเป็นทางการ หรือปรึกษาผู้เชี่ยวชาญทางการเงินที่มีคุณสมบัติเหมาะสม</p>
+                `},
+                disclaimerTitle: { en: "Disclaimer:", th: "ข้อจำกัดความรับผิดชอบ:" }, // Separate for dynamic update
+                disclaimerText: { en: "This assessment is a mock RISA profile evaluation and should not be used as a real financial reference. It is designed for illustrative purposes only. For a comprehensive and personalized retirement income style assessment, please consider taking the full assessment on the official RISA website or consulting with a qualified financial advisor.", th: "การประเมินนี้เป็นการประเมินโปรไฟล์ RISA จำลอง และไม่ควรถือเป็นข้อมูลอ้างอิงทางการเงินจริง การประเมินนี้มีวัตถุประสงค์เพื่อเป็นตัวอย่างเท่านั้น สำหรับการประเมินสไตล์รายได้วัยเกษียณที่ครอบคลุมและเป็นส่วนตัว โปรดพิจารณาทำแบบประเมินฉบับเต็มบนเว็บไซต์ RISA อย่างเป็นทางการ หรือปรึกษาผู้เชี่ยวชาญทางการเงินที่มีคุณสมบัติเหมาะสม" },
+
+
+                // Questions and Options
+                q1: { en: "1. How do you prefer your essential retirement expenses to be covered?", th: "1. คุณต้องการให้ค่าใช้จ่ายที่จำเป็นในวัยเกษียณของคุณได้รับการคุ้มครองอย่างไร?" },
+                q1_a: { en: "A. Primarily through guaranteed, predictable income sources like annuities or pensions.", th: "ก. เป็นหลักผ่านแหล่งรายได้ที่รับประกันและคาดการณ์ได้ เช่น เงินบำนาญหรือเงินบำนาญ." },
+                q1_b: { en: "B. By setting aside specific, safe funds for short-term needs, while investing for long-term growth.", th: "ข. โดยการกันเงินทุนที่ปลอดภัยสำหรับความต้องการระยะสั้น ในขณะที่ลงทุนเพื่อการเติบโตในระยะยาว." },
+                q1_c: { en: "C. Through a diversified investment portfolio, with strategies to limit significant losses.", th: "ค. ผ่านพอร์ตการลงทุนที่หลากหลาย พร้อมกลยุทธ์ในการจำกัดการขาดทุนอย่างมีนัยสำคัญ." },
+                q1_d: { en: "D. From a flexible investment portfolio, accepting market fluctuations for higher growth potential.", th: "ง. จากพอร์ตการลงทุนที่ยืดหยุ่น ยอมรับความผันผวนของตลาดเพื่อศักยภาพการเติบโตที่สูงขึ้น." },
+
+                q2: { en: "2. How important is it for you to have flexibility to change your retirement income plan?", th: "2. การที่คุณมีความยืดหยุ่นในการเปลี่ยนแปลงแผนรายได้วัยเกษียณมีความสำคัญต่อคุณเพียงใด?" },
+                q2_a: { en: "A. Not very important; I prefer a set-it-and-forget-it plan that I can commit to.", th: "ก. ไม่สำคัญมากนัก; ฉันชอบแผนที่ตั้งค่าแล้วลืมได้ ซึ่งฉันสามารถผูกมัดได้." },
+                q2_b: { en: "B. Very important; I want the ability to adjust my strategy as life or markets evolve.", th: "ข. สำคัญมาก; ฉันต้องการความสามารถในการปรับกลยุทธ์ของฉันเมื่อชีวิตหรือตลาดเปลี่ยนแปลงไป." },
+                q2_c: { en: "C. Moderately important; I value a structured plan but want some flexibility for significant changes.", th: "ค. สำคัญปานกลาง; ฉันให้ความสำคัญกับแผนที่มีโครงสร้าง แต่ต้องการความยืดหยุ่นสำหรับการเปลี่ยนแปลงที่สำคัญ." },
+                q2_d: { en: "D. Extremely important; maximum adaptability is key for my comfort.", th: "ง. สำคัญอย่างยิ่ง; ความสามารถในการปรับตัวสูงสุดเป็นกุญแจสำคัญสำหรับความสะดวกสบายของฉัน." },
+
+                q3: { en: "3. What's your comfort level with market volatility impacting your retirement income?", th: "3. ระดับความสบายใจของคุณเกี่ยวกับความผันผวนของตลาดที่ส่งผลกระทบต่อรายได้วัยเกษียณของคุณคืออะไร?" },
+                q3_a: { en: "A. I want minimal exposure to market swings; stability is my priority.", th: "ก. ฉันต้องการการสัมผัสกับความผันผวนของตลาดน้อยที่สุด; ความมั่นคงคือสิ่งสำคัญที่สุดของฉัน." },
+                q3_b: { en: "B. I'm okay with some market exposure, especially for long-term growth, but want short-term income protected.", th: "ข. ฉันไม่เป็นไรกับการสัมผัสกับตลาดบ้าง โดยเฉพาะอย่างยิ่งสำหรับการเติบโตในระยะยาว แต่ต้องการให้รายได้ระยะสั้นได้รับการคุ้มครอง." },
+                q3_c: { en: "C. I'm comfortable with market exposure, provided there are mechanisms to limit large losses.", th: "ค. ฉันสบายใจกับการสัมผัสกับตลาด โดยมีกลไกในการจำกัดการขาดทุนจำนวนมาก." },
+                q3_d: { en: "D. I embrace market exposure for the potential of higher returns, even if it means more income variability.", th: "ง. ฉันยอมรับการสัมผัสกับตลาดเพื่อศักยภาพของผลตอบแทนที่สูงขึ้น แม้ว่าจะหมายถึงความผันผวนของรายได้ที่มากขึ้นก็ตาม." },
+
+                q4: { en: "4. How do you feel about using insurance products (like annuities) for retirement income?", th: "4. คุณรู้สึกอย่างไรเกี่ยวกับการใช้ผลิตภัณฑ์ประกันภัย (เช่น เงินบำนาญ) สำหรับรายได้วัยเกษียณ?" },
+                q4_a: { en: "A. I see them as a valuable tool for ensuring a guaranteed income for life.", th: "ก. ฉันเห็นว่าสิ่งเหล่านี้เป็นเครื่องมือที่มีคุณค่าในการสร้างรายได้ที่รับประกันตลอดชีวิต." },
+                q4_b: { en: "B. I might consider them for a portion of my income, but prefer to keep most assets flexible.", th: "ข. ฉันอาจพิจารณาใช้สำหรับรายได้ส่วนหนึ่ง แต่ชอบที่จะรักษาสินทรัพย์ส่วนใหญ่ให้ยืดหยุ่น." },
+                q4_c: { en: "C. I'd consider them if they offer some market participation while providing a level of protection.", th: "ค. ฉันจะพิจารณาใช้หากพวกเขามีส่วนร่วมในตลาดในขณะที่ให้การคุ้มครองระดับหนึ่ง." },
+                q4_d: { en: "D. I generally prefer to manage my investments directly and avoid insurance products.", th: "ง. โดยทั่วไปแล้ว ฉันชอบที่จะจัดการการลงทุนของฉันโดยตรงและหลีกเลี่ยงผลิตภัณฑ์ประกันภัย." },
+
+                q5: { en: "5. When planning for unexpected expenses in retirement, what's your preference?", th: "5. เมื่อวางแผนสำหรับค่าใช้จ่ายที่ไม่คาดคิดในวัยเกษียณ คุณชอบอะไร?" },
+                q5_a: { en: "A. Rely on a robust, guaranteed income stream that covers all my needs, including emergencies.", th: "ก. พึ่งพากระแสรายได้ที่แข็งแกร่งและรับประกันซึ่งครอบคลุมทุกความต้องการของฉัน รวมถึงกรณีฉุกเฉิน." },
+                q5_b: { en: "B. Keep a significant portion of liquid assets readily available, separate from long-term investments.", th: "ข. เก็บสินทรัพย์สภาพคล่องจำนวนมากไว้พร้อมใช้ แยกต่างหากจากการลงทุนระยะยาว." },
+                q5_c: { en: "C. Have a well-diversified portfolio that can be accessed, with strategies to minimize selling during downturns.", th: "ค. มีพอร์ตการลงทุนที่หลากหลายซึ่งสามารถเข้าถึงได้ พร้อมกลยุทธ์ในการลดการขายในช่วงขาลง." },
+                q5_d: { en: "D. Maintain a highly liquid portfolio that can be easily adjusted to cover unforeseen costs.", th: "ง. รักษาพอร์ตการลงทุนที่มีสภาพคล่องสูงซึ่งสามารถปรับเปลี่ยนได้อย่างง่ายดายเพื่อครอบคลุมค่าใช้จ่ายที่ไม่คาดฝัน." },
+
+                q6: { en: "6. What is your primary goal for the overall value of your retirement assets throughout retirement?", th: "6. เป้าหมายหลักของคุณสำหรับมูลค่ารวมของสินทรัพย์วัยเกษียณของคุณตลอดวัยเกษียณคืออะไร?" },
+                q6_a: { en: "A. To ensure a stable, predictable income stream, even if the overall asset value declines over time.", th: "ก. เพื่อให้แน่ใจว่ามีกระแสรายได้ที่มั่นคงและคาดการณ์ได้ แม้ว่ามูลค่าสินทรัพย์โดยรวมจะลดลงเมื่อเวลาผ่านไป." },
+                q6_b: { en: "B. To preserve capital for immediate and near-term needs, while allowing long-term assets to grow.", th: "ข. เพื่อรักษากระแสเงินทุนสำหรับความต้องการเร่งด่วนและระยะใกล้ ในขณะที่อนุญาตให้สินทรัพย์ระยะยาวเติบโต." },
+                q6_c: { en: "C. To grow the portfolio over time, but with a focus on managing downside risk.", th: "ค. เพื่อให้พอร์ตการลงทุนเติบโตเมื่อเวลาผ่านไป แต่โดยเน้นที่การจัดการความเสี่ยงขาลง." },
+                q6_d: { en: "D. To maximize the overall growth of my assets, even if it means more fluctuations in value.", th: "ง. เพื่อเพิ่มการเติบโตโดยรวมของสินทรัพย์ของฉัน แม้ว่าจะหมายถึงความผันผวนของมูลค่าที่มากขึ้นก็ตาม." },
+
+                // Profile Descriptions
+                totalReturnTitle: { en: `📈 Total Return <span class="text-gray-500 text-lg">(21-24 pts)</span>`, th: `📈 ผลตอบแทนรวม <span class="text-gray-500 text-lg">(21-24 คะแนน)</span>` },
+                totalReturnDesc: { en: "You prefer income based on market growth and value flexibility to adapt to changes.", th: "คุณชอบรายได้ที่ขึ้นอยู่กับการเติบโตของตลาดและให้ความสำคัญกับความยืดหยุ่นในการปรับตัวเข้ากับการเปลี่ยนแปลง" },
+                totalReturnStrat1: { en: "Systematic withdrawals from a diversified portfolio.", th: "การถอนเงินอย่างเป็นระบบจากพอร์ตการลงทุนที่หลากหลาย" },
+                totalReturnStrat2: { en: "Flexible spending rules (e.g., 'Guardrails' approach).", th: "กฎการใช้จ่ายที่ยืดหยุ่น (เช่น แนวทาง 'Guardrails')" },
+                totalReturnStrat3: { en: "Emphasis on maximizing long-term portfolio value.", th: "การเน้นการเพิ่มมูลค่าพอร์ตการลงทุนในระยะยาว" },
+                totalReturnProd1: { en: "Diversified mutual funds/ETFs (equities, bonds).", th: "กองทุนรวม/ETF ที่หลากหลาย (หุ้น, พันธบัตร)" },
+                totalReturnProd2: { en: "Individual stocks and bonds.", th: "หุ้นและพันธบัตรรายตัว" },
+                totalReturnProd3: { en: "Low-cost brokerage accounts.", th: "บัญชีโบรกเกอร์ต้นทุนต่ำ" },
+                totalReturnAlloc: { en: "Higher allocation to equities (e.g., 60-80% equities, 20-40% fixed income), reflecting comfort with market volatility for growth potential.", th: "การจัดสรรหุ้นที่สูงขึ้น (เช่น หุ้น 60-80%, ตราสารหนี้ 20-40%) สะท้อนถึงความสบายใจกับความผันผวนของตลาดเพื่อศักยภาพการเติบโต" },
+
+                protectedIncomeTitle: { en: `🔒 Protected Income <span class="text-gray-500 text-lg">(6-10 pts)</span>`, th: `🔒 รายได้ที่ได้รับการคุ้มครอง <span class="text-gray-500 text-lg">(6-10 คะแนน)</span>` },
+                protectedIncomeDesc: { en: "You prioritize guaranteed income streams and prefer a committed, stable financial plan.", th: "คุณให้ความสำคัญกับกระแสรายได้ที่รับประกันและชอบแผนการเงินที่มั่นคงและมีโครงสร้าง" },
+                protectedIncomeStrat1: { en: "Building a 'floor' of guaranteed income to cover essential expenses.", th: "การสร้าง 'พื้นฐาน' ของรายได้ที่รับประกันเพื่อครอบคลุมค่าใช้จ่ายที่จำเป็น" },
+                protectedIncomeStrat2: { en: "Using remaining assets for discretionary spending or growth.", th: "การใช้สินทรัพย์ที่เหลือสำหรับค่าใช้จ่ายตามดุลยพินิจหรือการเติบโต" },
+                protectedIncomeStrat3: { en: "Focus on predictability and security.", th: "เน้นความสามารถในการคาดการณ์และความปลอดภัย" },
+                protectedIncomeProd1: { en: "Immediate or Deferred Income Annuities.", th: "เงินบำนาญรายได้แบบทันทีหรือแบบรอรับ" },
+                protectedIncomeProd2: { en: "Social Security benefits.", th: "สิทธิประโยชน์ประกันสังคม" },
+                protectedIncomeProd3: { en: "Pensions.", th: "เงินบำนาญ" },
+                protectedIncomeProd4: { en: "High-quality government bonds.", th: "พันธบัตรรัฐบาลคุณภาพสูง" },
+                protectedIncomeAlloc: { en: "Significant portion of assets allocated to income-generating annuities or fixed-income products. Remaining portfolio can be more growth-oriented (e.g., 30-50% equities, 50-70% fixed income/annuities).", th: "การจัดสรรสินทรัพย์จำนวนมากให้กับเงินบำนาญที่สร้างรายได้หรือผลิตภัณฑ์ตราสารหนี้ พอร์ตการลงทุนที่เหลือสามารถเน้นการเติบโตได้มากขึ้น (เช่น หุ้น 30-50%, ตราสารหนี้/เงินบำนาญ 50-70%)" },
+
+                riskWrapTitle: { en: `🛡️ Risk Wrap <span class="text-gray-500 text-lg">(16-20 pts)</span>`, th: `🛡️ การห่อหุ้มความเสี่ยง <span class="text-gray-500 text-lg">(16-20 คะแนน)</span>` },
+                riskWrapDesc: { en: "You seek market growth but desire a structured plan with built-in protections against major downturns.", th: "คุณแสวงหาการเติบโตของตลาด แต่ต้องการแผนที่มีโครงสร้างพร้อมการป้องกันในตัวจากการตกต่ำครั้งใหญ่" },
+                riskWrapStrat1: { en: "Investing for growth while using strategies to mitigate downside risk.", th: "การลงทุนเพื่อการเติบโตในขณะที่ใช้กลยุทธ์เพื่อลดความเสี่ยงขาลง" },
+                riskWrapStrat2: { en: "Implementing guardrails or systematic rebalancing.", th: "การใช้มาตรการควบคุมหรือการปรับสมดุลอย่างเป็นระบบ" },
+                riskWrapStrat3: { en: "Focus on long-term growth with a safety net.", th: "เน้นการเติบโตในระยะยาวพร้อมตาข่ายนิรภัย" },
+                riskWrapProd1: { en: "Diversified portfolios with tactical asset allocation.", th: "พอร์ตการลงทุนที่หลากหลายพร้อมการจัดสรรสินทรัพย์เชิงกลยุทธ์" },
+                riskWrapProd2: { en: "Variable annuities with guaranteed minimum withdrawal benefits (GMWBs).", th: "เงินบำนาญผันแปรพร้อมผลประโยชน์การถอนขั้นต่ำที่รับประกัน (GMWBs)" },
+                riskWrapProd3: { en: "Structured products.", th: "ผลิตภัณฑ์ที่มีโครงสร้าง" },
+                riskWrapProd4: { en: "Hedging strategies (e.g., put options, inverse ETFs - for advanced investors).", th: "กลยุทธ์การป้องกันความเสี่ยง (เช่น put options, inverse ETFs - สำหรับนักลงทุนขั้นสูง)" },
+                riskWrapAlloc: { en: "A balanced approach with a strong equity component, but with specific products or strategies to limit severe losses (e.g., 50-70% equities, 30-50% fixed income, potentially with a portion in GMWB annuities).", th: "แนวทางที่สมดุลพร้อมองค์ประกอบหุ้นที่แข็งแกร่ง แต่มีผลิตภัณฑ์หรือกลยุทธ์เฉพาะเพื่อจำกัดการขาดทุนอย่างรุนแรง (เช่น หุ้น 50-70%, ตราสารหนี้ 30-50% โดยอาจมีส่วนหนึ่งในเงินบำนาญ GMWB)" },
+
+                timeSegmentationTitle: { en: `⏳ Time Segmentation <span class="text-gray-500 text-lg">(11-15 pts)</span>`, th: `⏳ การแบ่งส่วนตามเวลา <span class="text-gray-500 text-lg">(11-15 คะแนน)</span>` },
+                timeSegmentationDesc: { en: "You prefer a mix of guaranteed income for short-term needs and market-based growth for long-term goals, valuing flexibility.", th: "คุณชอบการผสมผสานระหว่างรายได้ที่รับประกันสำหรับความต้องการระยะสั้นและการเติบโตตามตลาดสำหรับเป้าหมายระยะยาว โดยให้ความสำคัญกับความยืดหยุ่น" },
+                timeSegmentationStrat1: { en: "'Bucketing' strategy: allocating funds to different time horizons.", th: "กลยุทธ์ 'Bucketing': การจัดสรรเงินทุนตามช่วงเวลาที่แตกต่างกัน" },
+                timeSegmentationStrat2: { en: "Short-term bucket for immediate needs (safe assets).", th: "Bucket ระยะสั้นสำหรับความต้องการเร่งด่วน (สินทรัพย์ปลอดภัย)" },
+                timeSegmentationStrat3: { en: "Long-term bucket for future needs (growth assets).", th: "Bucket ระยะยาวสำหรับความต้องการในอนาคต (สินทรัพย์เติบโต)" },
+                timeSegmentationStrat4: { en: "Flexibility to adjust buckets based on market performance.", th: "ความยืดหยุ่นในการปรับ Bucket ตามผลการดำเนินงานของตลาด" },
+                timeSegmentationProd1: { en: "Cash, money market accounts, CDs (short-term bucket).", th: "เงินสด, บัญชีตลาดเงิน, CDs (Bucket ระยะสั้น)" },
+                timeSegmentationProd2: { en: "Short-term bonds (intermediate bucket).", th: "พันธบัตรระยะสั้น (Bucket กลาง)" },
+                timeSegmentationProd3: { en: "Diversified equities and long-term bonds (long-term bucket).", th: "หุ้นที่หลากหลายและพันธบัตรระยะยาว (Bucket ระยะยาว)" },
+                timeSegmentationAlloc: { en: "Varies by bucket: near-term buckets are very conservative (e.g., 0-10% equities), while longer-term buckets are more aggressive (e.g., 70-90% equities). Overall, it's a blend of fixed income and growth assets.", th: "แตกต่างกันไปตาม Bucket: Bucket ระยะใกล้จะอนุรักษ์นิยมมาก (เช่น หุ้น 0-10%) ในขณะที่ Bucket ระยะยาวจะก้าวร้าวมากขึ้น (เช่น หุ้น 70-90%) โดยรวมแล้วเป็นการผสมผสานระหว่างตราสารหนี้และสินทรัพย์เติบโต" },
+            };
+
+            // Function to update text based on current language
+            function updateContent() {
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    if (translations[key] && translations[key][currentLang]) {
+                        // Special handling for elements that contain HTML (like profile titles and disclaimer)
+                        if (key.includes('Title') || key === 'disclaimerSection') { // Check if key is a title or disclaimerSection
+                            element.innerHTML = translations[key][currentLang];
+                        } else {
+                            element.textContent = translations[key][currentLang];
+                        }
+                    }
+                });
+                langToggleButton.textContent = currentLang === 'en' ? '🇬🇧 / 🇹🇭' : '🇹🇭 / 🇬🇧';
+            }
+
+            // Function to show custom message box
+            function showMessage(message) {
+                messageText.textContent = message;
+                messageBox.classList.remove('hidden');
+            }
+
+            // Event listener for message box close button
+            messageCloseButton.addEventListener('click', () => {
+                messageBox.classList.add('hidden');
+            });
+
+            // Initial content load
+            updateContent();
+
+            // Add event listeners for radio button styling
+            const radioOptions = document.querySelectorAll('.radio-option');
+            radioOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const input = option.querySelector('input[type="radio"]');
+                    const name = input.name;
+
+                    // Remove 'selected' class from all options in the same group
+                    document.querySelectorAll(`input[name="${name}"]`).forEach(otherInput => {
+                        otherInput.closest('.radio-option').classList.remove('selected');
+                    });
+
+                    // Add 'selected' class to the clicked option
+                    option.classList.add('selected');
+                    input.checked = true; // Ensure the radio button is checked
+                });
+            });
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                let totalScore = 0;
+                const questions = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6'];
+                let allAnswered = true;
+
+                questions.forEach(qName => {
+                    const selectedOption = document.querySelector(`input[name="${qName}"]:checked`);
+                    if (selectedOption) {
+                        totalScore += parseInt(selectedOption.value);
+                    } else {
+                        allAnswered = false;
+                    }
+                });
+
+                if (!allAnswered) {
+                    showMessage(currentLang === 'en' ? "Please answer all questions to determine your RISA profile." : "โปรดตอบคำถามทุกข้อเพื่อกำหนดโปรไฟล์ RISA ของคุณ");
+                    return;
+                }
+
+                let profile = '';
+                let description = '';
+
+                // Map total score to RISA Profile
+                if (totalScore >= 6 && totalScore <= 10) {
+                    profile = 'protected-income';
+                    description = currentLang === 'en' ? "You prioritize reliable, guaranteed income streams and prefer a stable, structured financial plan with clear commitments." : "คุณให้ความสำคัญกับกระแสรายได้ที่รับประกันและชอบแผนการเงินที่มั่นคงและมีโครงสร้าง";
+                } else if (totalScore >= 11 && totalScore <= 15) {
+                    profile = 'time-segmentation';
+                    description = currentLang === 'en' ? "You prefer a blend of guaranteed income for immediate needs and market-based growth for long-term goals, while maintaining flexibility." : "คุณชอบการผสมผสานระหว่างรายได้ที่รับประกันสำหรับความต้องการระยะสั้นและการเติบโตตามตลาดสำหรับเป้าหมายระยะยาว โดยให้ความสำคัญกับความยืดหยุ่น";
+                } else if (totalScore >= 16 && totalScore <= 20) {
+                    profile = 'risk-wrap';
+                    description = currentLang === 'en' ? "You seek market growth but desire a structured plan with built-in protections or guardrails to manage significant market risks." : "คุณแสวงหาการเติบโตของตลาด แต่ต้องการแผนที่มีโครงสร้างพร้อมการป้องกันในตัวจากการตกต่ำครั้งใหญ่";
+                } else if (totalScore >= 21 && totalScore <= 24) {
+                    profile = 'total-return';
+                    description = currentLang === 'en' ? "You are comfortable with market-based income and value flexibility to adapt to changing circumstances. You aim for maximizing long-term growth." : "คุณสบายใจกับรายได้ตามตลาดและให้ความสำคัญกับความยืดหยุ่นในการปรับตัวเข้ากับสถานการณ์ที่เปลี่ยนแปลงไป คุณตั้งเป้าหมายที่จะเพิ่มการเติบโตในระยะยาว";
+                }
+
+                // Display results
+                yourProfileName.textContent = profile.replace('-', ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                yourProfileDescription.textContent = description;
+                totalScoreDisplay.textContent = totalScore;
+
+                // Show results section
+                resultsSection.classList.remove('hidden');
+
+                // Clear previous highlights and move cards
+                Object.values(allProfileCards).forEach(card => {
+                    card.classList.remove('highlight');
+                    // Reset to original parent if moved
+                    if (card.parentNode.id === 'highlighted-profile-card') {
+                        document.querySelector('.other-cards').appendChild(card);
+                    }
+                });
+
+                // Highlight and move the determined profile card
+                const determinedCard = allProfileCards[profile];
+                if (determinedCard) {
+                    determinedCard.classList.add('highlight');
+                    highlightedProfileCard.appendChild(determinedCard); // Move to the highlighted spot
+                }
+
+                // Append remaining cards to 'other-cards' div
+                const otherCardsContainer = document.querySelector('.other-cards');
+                // Ensure correct order when re-appending
+                const order = ['total-return', 'protected-income', 'risk-wrap', 'time-segmentation'];
+                order.forEach(key => {
+                    const card = allProfileCards[key];
+                    if (card && card.parentNode !== highlightedProfileCard) {
+                        otherCardsContainer.appendChild(card);
+                    }
+                });
+
+                // Scroll to the results section smoothly
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Reset Button Functionality
+            resetButton.addEventListener('click', () => {
+                form.reset(); // Resets all form fields
+                radioOptions.forEach(option => {
+                    option.classList.remove('selected'); // Remove selected styling
+                });
+                resultsSection.classList.add('hidden'); // Hide results section
+                yourProfileName.textContent = '';
+                yourProfileDescription.textContent = '';
+                totalScoreDisplay.textContent = '';
+
+                // Move all cards back to the 'other-cards' container and remove highlight
+                Object.values(allProfileCards).forEach(card => {
+                    card.classList.remove('highlight');
+                    document.querySelector('.other-cards').appendChild(card);
+                });
+
+                // Scroll to the top of the assessment
+                assessmentSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Language Toggle Button Functionality
+            langToggleButton.addEventListener('click', () => {
+                currentLang = currentLang === 'en' ? 'th' : 'en';
+                updateContent();
+                // Re-evaluate profile description in case language changes after submission
+                // This will re-trigger the form submission logic to update the description in the new language
+                const submitEvent = new Event('submit', { cancelable: true });
+                form.dispatchEvent(submitEvent);
+            });
+        });
+    </script>
+</body>
+</html>
